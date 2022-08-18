@@ -27,12 +27,7 @@ public class UserController {
     @GetMapping(value = "{userId}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable long userId){
 
-        List<UserDTO> usersWithMatchingId= USERS.stream().filter(userDTO -> userDTO.getId() == userId)
-                .collect(Collectors.toList());
-
-        if(usersWithMatchingId.size()==1)
-            return ResponseEntity.ok(usersWithMatchingId.get(0));
-        else return null; //TODO dopisać GlobalHTTPErrorHandler i rzucic bład
+        return ResponseEntity.ok(new UserDTO(userId, "Test user", "1", 131313));
 
     }
 
