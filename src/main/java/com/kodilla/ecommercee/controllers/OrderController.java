@@ -46,7 +46,7 @@ public class OrderController {
     @PutMapping
     public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) {
         Order order = orderMapper.mapToOrder(orderDto);
-        Order savedOrder = order; //next: get method from DBservice
+        Order savedOrder = order;  //next: get method from DBservice
         return ResponseEntity.ok(orderMapper.mapToOrderDto(savedOrder));
     }
 
