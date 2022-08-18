@@ -22,18 +22,18 @@ public class CartController {
         return new ArrayList<>();
     }
 
-    @PostMapping(value = "{productId}")
-    public void addProduct(@PathVariable Long productId) {
-
+    @PostMapping
+    public void addProduct(ProductDto productDto) {
+        cart.add(productDto);
     }
 
-    @DeleteMapping(value = "{productId}")
-    public void deleteProduct(@PathVariable Long productId) {
-
+    @DeleteMapping
+    public void deleteProduct(ProductDto productDto) {
+        cart.remove(productDto);
     }
 
-    @PostMapping(value = "{cartId}")
-    public void createOrder(@PathVariable Long cartId) {
+    @PostMapping
+    public void createOrder(List<ProductDto> cart) {
 
     }
 }
