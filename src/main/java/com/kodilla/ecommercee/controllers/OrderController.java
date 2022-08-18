@@ -17,9 +17,9 @@ public class OrderController {
 
     private final OrderMapper orderMapper;
     private static final List<Order> orderList = Arrays.asList(
-            new Order(1,"Order1", "Description1"),
-            new Order(2,"Order2", "Description3"),
-            new Order(3,"Order3", "Description4")
+            new Order(1L,"Order1", "Description1"),
+            new Order(2L,"Order2", "Description3"),
+            new Order(3L,"Order3", "Description4")
     );
 
     @Autowired
