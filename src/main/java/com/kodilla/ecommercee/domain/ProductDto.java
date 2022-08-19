@@ -14,4 +14,24 @@ public class ProductDto {
         this.price = price;
         this.groupId = groupId;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Long getGroupId() {
+        return groupId;
+    }
 }
