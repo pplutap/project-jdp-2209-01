@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controllers;
 
 import com.kodilla.ecommercee.domain.ProductDto;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,9 +11,9 @@ import java.util.List;
 @RequestMapping("/api/v1/cart")
 public class CartController {
 
-    List<ProductDto> cart;
+    private List<ProductDto> cart;
 
-    @PostMapping
+    @GetMapping(value = "/cart/")
     public void createCart() {
         cart = new ArrayList<>();
     }
@@ -22,18 +23,18 @@ public class CartController {
         return new ArrayList<>();
     }
 
-    @PostMapping
-    public void addProduct(ProductDto productDto) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addProduct(@RequestBody ProductDto productDto) {
         cart.add(productDto);
     }
 
-    @DeleteMapping
-    public void deleteProduct(ProductDto productDto) {
-        cart.remove(productDto);
+    @DeleteMapping(value = "{productId}")
+    public void deleteProduct(@PathVariable Long productId) {
+        cart.remove(productId);
     }
 
-    @PostMapping
-    public void createOrder(List<ProductDto> cart) {
+    @PostMapping(value = "/order/")
+    public void createOrder(@RequestBody List<ProductDto> cart) {
 
     }
 }
