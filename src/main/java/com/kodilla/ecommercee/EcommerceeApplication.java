@@ -3,7 +3,8 @@ package com.kodilla.ecommercee;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={
+        "com.kodilla.ecommercee.*"})
 public class EcommerceeApplication {
 
     public static void main(String[] args) {
