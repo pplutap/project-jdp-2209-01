@@ -41,7 +41,7 @@ public class Order {
 
 //    TO DO: connect to Cart
 //    @OneToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "CART_ID")
+//    @JoinColumn(name = "cart_id")
 //    public Cart getCart() {
 //        return cart;
 //    }
