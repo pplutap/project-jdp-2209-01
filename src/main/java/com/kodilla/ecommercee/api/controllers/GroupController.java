@@ -20,7 +20,7 @@ public class GroupController {
 
     @GetMapping(value = "{groupId}")
     public ResponseEntity<GroupDto> getGroupById (@PathVariable Long groupId) {
-        return ResponseEntity.ok(new GroupDto(1,"Test name"));
+        return ResponseEntity.ok(new GroupDto(1L,"Test name"));
     }
 
     @DeleteMapping (value = "{groupId}")
@@ -35,7 +35,7 @@ public class GroupController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GroupDto> updateGroup (@RequestBody GroupDto groupDto) {
-        return ResponseEntity.ok(new GroupDto(1, "Test name"));
+        return ResponseEntity.ok(new GroupDto(1L, "Test name"));
     }
 
 }
