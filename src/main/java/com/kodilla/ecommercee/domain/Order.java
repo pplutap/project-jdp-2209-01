@@ -8,9 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,10 +22,10 @@ public class Order {
     @Column(name = "ORDER_ID", unique = true)
     private Long id;
 
-    @Column
+    @Column(name = "NAME")
     private String name;
 
-    @Column
+    @Column(name = "COMMENT")
     private String comment;
 
     @Column(name = "PAYMENT")
@@ -41,6 +39,7 @@ public class Order {
     @CreationTimestamp
     private Date creationDate;
 
+//
 //    @ManyToOne
 //    @JoinColumn(name = "USER_ID")
 //    private User user;
@@ -53,3 +52,4 @@ public class Order {
 //    )
 //    private List<ProductRequest> productRequest = new ArrayList<>();
 }
+
