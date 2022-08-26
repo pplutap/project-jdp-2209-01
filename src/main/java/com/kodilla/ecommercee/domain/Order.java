@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,11 +9,11 @@ import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Data
 @Entity(name = "ORDERS")
 public class Order {
 
+    @NotNull
     @Id
     @GeneratedValue
     @Column(name = "ORDER_ID", unique = true)
@@ -37,6 +34,7 @@ public class Order {
 
     @NotNull
     @CreationTimestamp
+    @Column(name = "DATE")
     private Date creationDate;
 
 //    @ManyToOne
