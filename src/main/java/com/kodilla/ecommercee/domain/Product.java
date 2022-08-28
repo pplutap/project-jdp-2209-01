@@ -30,11 +30,11 @@ public class Product {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    @NotNull
-    @Column(name = "GROUP_ID")
-    private GroupId groupId;
+    //@ManyToOne
+    //@Column(name = "GROUP_ID")
+    //private GroupId groupId;
 
-    @Column(name = "VERSION")
-    private int version;
+    //@Column(name = "VERSION")
+    //private Intiger version;
 
 }
