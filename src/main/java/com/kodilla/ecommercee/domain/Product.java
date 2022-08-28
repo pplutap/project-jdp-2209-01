@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "products")
+@Entity(name = "PRODUCTS")
 public class Product {
 
 
@@ -19,7 +19,7 @@ public class Product {
     @NotNull
     @GeneratedValue
     @Column(name = "PRODUCT_ID", unique = true)
-    private Long Id;
+    private Long id;
 
     @Column(name = "NAME")
     private String name;
@@ -30,11 +30,11 @@ public class Product {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    //@ManyToOne
-    //@Column(name = "GROUP_ID")
-    //private GroupId groupId;
+    @ManyToOne
+    @Column(name = "GROUP_ID")
+    private GroupId groupId;
 
-    //@Column(name = "VERSION")
-    //private Intiger version;
+    @Column(name = "VERSION")
+    private Intiger version;
 
 }
