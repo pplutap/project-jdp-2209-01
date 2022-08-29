@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.rmi.activation.ActivationGroupID;
 
 @Data
 @AllArgsConstructor
@@ -30,11 +31,11 @@ public class Product {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    //@ManyToOne
-    //@Column(name = "GROUP_ID")
-    //private GroupId groupId;
+    @ManyToOne
+    @Column(name = "GROUP_ID")
+    private Group groupId;
 
-    //@Column(name = "VERSION")
-    //private Intiger version;
+    @Column(name = "VERSION")
+    private Integer version;
 
 }
