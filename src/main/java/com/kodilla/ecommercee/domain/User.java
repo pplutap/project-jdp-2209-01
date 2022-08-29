@@ -26,7 +26,7 @@ public class User {
     @Column(name = "USER_KEY")
     private long userKey;
 
-    //@ManyToOne
+    //@OneToMany
     //JoinColumn(name = "LOGIN_ID")
     //private Login loginInfo;
 
@@ -34,7 +34,7 @@ public class User {
     //JoinColumn(name = "USER_CART")
     //private Cart cart;
 
-    //@ManyToOne
+    //@OneToMany
     //JoinColumn(name = "USER_ORDER")
     //private Order order;
 }
