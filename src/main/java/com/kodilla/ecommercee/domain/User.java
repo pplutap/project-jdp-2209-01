@@ -30,7 +30,7 @@ public class User {
     //JoinColumn(name = "LOGIN_ID")
     //private Login loginInfo;
 
-    //@ManyToOne
+    //@OneToOne
     //JoinColumn(name = "USER_CART")
     //private Cart cart;
 
