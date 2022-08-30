@@ -32,8 +32,8 @@ public class Product {
     private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "GROUP_ID")
-    private Group groupId;
+    @JoinColumn(name = "GROUP")
+    private Group group;
 
     @Column(name = "VERSION")
     private Integer version;
