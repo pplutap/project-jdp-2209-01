@@ -26,7 +26,6 @@ public class User {
     @Column(name = "USER_KEY")
     private long userKey;
 
-    //@OneToMany
     //JoinColumn(name = "LOGIN_ID")
     //private Login loginInfo;
 
