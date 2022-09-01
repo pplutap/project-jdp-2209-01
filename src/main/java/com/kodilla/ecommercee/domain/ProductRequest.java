@@ -29,7 +29,7 @@ public class ProductRequest {
     private Product product;
 
     @OneToOne
-    @Column(name = "CART_ID")
+    @JoinColumn(name = "CART_ID")
     private Cart cart;
 
     @OneToOne
