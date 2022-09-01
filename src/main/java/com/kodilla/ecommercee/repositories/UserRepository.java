@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee.repository;
+package com.kodilla.ecommercee.repositories;
 
 import com.kodilla.ecommercee.domain.User;
 import org.springframework.data.repository.CrudRepository;
