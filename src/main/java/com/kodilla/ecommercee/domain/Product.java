@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 @Entity(name = "PRODUCTS")
 public class Product {
 
-
     @Id
     @NotNull
     @GeneratedValue
@@ -36,5 +35,4 @@ public class Product {
 
     @Column(name = "VERSION")
     private Integer version;
-
 }

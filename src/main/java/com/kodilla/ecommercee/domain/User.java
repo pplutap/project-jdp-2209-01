@@ -4,11 +4,12 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "USER")
+@Entity(name = "USERS")
 public class User {
 
     @NotNull
@@ -26,14 +27,13 @@ public class User {
     @Column(name = "USER_KEY")
     private long userKey;
 
-    //JoinColumn(name = "LOGIN_ID")
-    //private Login loginInfo;
+    @Column(name = "LOGIN_INFO")
+    private Login loginInfo;
 
-    //@OneToOne
-    //JoinColumn(name = "USER_CART")
-    //private Cart cart;
+    @OneToOne
+    @JoinColumn(name = "USER_CART")
+    private Cart cart;
 
-    //@OneToMany
-    //JoinColumn(name = "USER_ORDER")
-    //private Order order;
+    @OneToMany
+    private List<Order> orders;
 }

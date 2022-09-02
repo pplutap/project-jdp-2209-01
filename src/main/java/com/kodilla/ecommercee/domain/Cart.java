@@ -1,56 +1,30 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "CARTS")
 public class Cart {
 
-    private Long id;
-//    private User user;
-//    private List<ProductRequest> productRequestList;
-
     @Id
     @NotNull
     @GeneratedValue
     @Column(name = "CART_ID", unique = true)
-    public Long getId() {
-        return id;
-    }
+    private Long id;
 
-//    @OneToOne
-//    @JoinColumn(name = "USER_ID")
-//    @NotNull
-//    public User getUser() {
-//        return user;
-//    }
+    @OneToOne
+    @JoinColumn(name = "USER_ID")
+    @NotNull
+    private User user;
 
-//    @ManyToMany
-//    @JoinTable(name = "JOIN_CART_PRODUCT_REQUEST",
-//    joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
-//    inverseJoinColumns = {@JoinColumn(name = "PRODUCT_REQUEST_ID", referencedColumnName = "PRODUCT_REQUEST_ID")})
-//    public List<ProductRequest> getProductRequestList() {
-//        return productRequestList;
-//    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-//
-//    public void setProductRequestList(List<ProductRequest> productRequestList) {
-//        this.productRequestList = productRequestList;
-//    }
+    @OneToOne
+    @JoinColumn(name = "PRODUCT_REQUEST_ID")
+    private ProductRequest productRequest;
 }
