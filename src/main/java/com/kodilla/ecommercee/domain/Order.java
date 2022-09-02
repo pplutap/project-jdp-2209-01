@@ -41,7 +41,7 @@ public class Order {
     private User user;
 
     @OneToOne
-    @JoinColumn(name = "PRODUCT_REQUEST_ID")
-    private ProductRequest productRequest;
+    @JoinColumn(name = "REQUEST_PRODUCT_ID")
+    private RequestProduct requestProduct;
 }
 

@@ -10,13 +10,13 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "PRODUCT_REQUESTS")
-public class ProductRequest {
+@Entity(name = "REQUEST_PRODUCTS")
+public class RequestProduct {
 
     @NotNull
     @Id
     @GeneratedValue
-    @Column(name = "PRODUCT_REQUEST_ID", unique = true)
+    @Column(name = "REQUEST_PRODUCT_ID", unique = true)
     private Long id;
 
     @NotNull
