@@ -1,25 +1,24 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "groups")
+@Entity(name = "GROUP_ENTITY")
 public class Group {
 
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "group_id", unique = true)
+    @Column(name = "GROUP_ID", unique = true)
     private Long id;
 
-    @Column(name = "group_name")
+    @Column(name = "GROUP_NAME")
     private String name;
 }

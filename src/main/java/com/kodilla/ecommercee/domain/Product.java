@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 @Entity(name = "PRODUCTS")
 public class Product {
 
-
     @Id
     @NotNull
     @GeneratedValue
@@ -31,10 +30,9 @@ public class Product {
     private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "GROUP")
+    @JoinColumn(name = "GROUP_ID")
     private Group group;
 
     @Column(name = "VERSION")
     private Integer version;
-
 }
