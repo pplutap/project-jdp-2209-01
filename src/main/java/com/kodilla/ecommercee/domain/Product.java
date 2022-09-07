@@ -1,8 +1,11 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.EcommerceeApplication;
+import com.kodilla.ecommercee.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,4 +38,12 @@ public class Product {
 
     @Column(name = "VERSION")
     private Integer version;
+
+    @PreRemove
+    private void checkRelations(){
+
+
+
+    }
+
 }
