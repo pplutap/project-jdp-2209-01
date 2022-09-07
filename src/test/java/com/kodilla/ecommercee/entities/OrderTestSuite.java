@@ -156,7 +156,7 @@ public class OrderTestSuite {
 
         Assertions.assertEquals("Very important order", testOrderAfter.getComment());
         Assertions.assertEquals(true, testOrderAfter.isPaid());
-        Assertions.asser ctEquals("Slow delivery", testOrderAfter.getName());
+        Assertions.assertEquals("Slow delivery", testOrderAfter.getName());
         Assertions.assertEquals(Status.PREPARED, testOrderAfter.getStatus());
         Assertions.assertEquals(order.getRequestProduct().getId(), testOrderAfter.getRequestProduct().getId());
         Assertions.assertEquals(order.getUser().getId(), testOrderAfter.getUser().getId());
