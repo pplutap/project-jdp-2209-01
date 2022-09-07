@@ -43,9 +43,6 @@ public class GroupTestSuite {
 
     }
 
-
-
-
     @Test
     void shouldNotDelete(){
         //given
@@ -68,7 +65,5 @@ public class GroupTestSuite {
         groupRepository.deleteAll();
 
     }
-
-
 
 }
