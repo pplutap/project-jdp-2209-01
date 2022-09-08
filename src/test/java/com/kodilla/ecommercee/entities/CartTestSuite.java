@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+//import static org.junit.jupiter.api.Assertions.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -34,16 +36,16 @@ public class CartTestSuite {
     @Autowired
     CartRepository cartRepository;
 
+    Group group = new Group();
+    Order order = new Order();
+    User user = new User();
+    Product product = new Product();
+    RequestProduct requestProduct = new RequestProduct();
+    Cart cart = new Cart();
+
     @Test
     public void shouldSaveCartEntity() {
         //Given
-        Group group = new Group();
-        Order order = new Order();
-        User user = new User();
-        Product product = new Product();
-        RequestProduct requestProduct = new RequestProduct();
-        Cart cart = new Cart();
-
         group.setName("First group");
 
         order.setName("First order");
@@ -51,7 +53,6 @@ public class CartTestSuite {
         order.setPaid(true);
         order.setStatus(Status.SENT);
         order.setCreationDate(new Date());
-//        new Date(2022,  9, 7)
         order.setUser(user);
         order.setRequestProduct(requestProduct);
 
