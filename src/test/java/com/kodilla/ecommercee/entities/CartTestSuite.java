@@ -44,52 +44,75 @@ public class CartTestSuite {
     Cart cart = new Cart();
 
     @Test
-    public void shouldSaveCartEntity() {
-        //Given
-        group.setName("First group");
-
-        order.setName("First order");
-        order.setComment("Order description");
-        order.setPaid(true);
-        order.setStatus(Status.SENT);
-        order.setCreationDate(new Date());
-        order.setUser(user);
-        order.setRequestProduct(requestProduct);
-
-        user.setName("John");
-        user.setStatus("Active");
-        user.setUserKey(1);
-        user.setLoginInfo(Login.LOGGED);
-
-        product.setName("First product");
-        product.setDescription("Product description");
-        product.setPrice(new BigDecimal(200.00));
-        product.setGroup(group);
-        product.setVersion(1);
+    public void addCartTest() {
 
         requestProduct.setQuantity(22.00);
         requestProduct.setProduct(product);
         requestProduct.setCart(cart);
         requestProduct.setOrder(order);
-
+        user.setName("John");
+        user.setStatus("Active");
+        user.setUserKey(1);
+        user.setLoginInfo(Login.LOGGED);
         cart.setUser(user);
         cart.setRequestProduct(requestProduct);
-
-        //When
-        groupRepository.save(group);
-        orderRepository.save(order);
-        userRepository.save(user);
-        productRepository.save(product);
-        requestProductRepository.save(requestProduct);
         cartRepository.save(cart);
 
         boolean cartTest = cartRepository.existsById(7L);
         Long cartId = cartRepository.save(cart).getId();
         boolean cartActual = cartRepository.existsById(cartId);
 
-        //Then
         assertEquals(false, cartTest);
         assertEquals(true, cartActual);
     }
+
+//    @Test
+//    public void shouldSaveCartEntity() {
+//        //Given
+//        group.setName("First group");
+//
+//        order.setName("First order");
+//        order.setComment("Order description");
+//        order.setPaid(true);
+//        order.setStatus(Status.SENT);
+//        order.setCreationDate(new Date());
+//        order.setUser(user);
+//        order.setRequestProduct(requestProduct);
+//
+//        user.setName("John");
+//        user.setStatus("Active");
+//        user.setUserKey(1);
+//        user.setLoginInfo(Login.LOGGED);
+//
+//        product.setName("First product");
+//        product.setDescription("Product description");
+//        product.setPrice(new BigDecimal(200.00));
+//        product.setGroup(group);
+//        product.setVersion(1);
+//
+//        requestProduct.setQuantity(22.00);
+//        requestProduct.setProduct(product);
+//        requestProduct.setCart(cart);
+//        requestProduct.setOrder(order);
+//
+//        cart.setUser(user);
+//        cart.setRequestProduct(requestProduct);
+//
+//        //When
+//        groupRepository.save(group);
+//        orderRepository.save(order);
+//        userRepository.save(user);
+//        productRepository.save(product);
+//        requestProductRepository.save(requestProduct);
+//        cartRepository.save(cart);
+//
+//        boolean cartTest = cartRepository.existsById(7L);
+//        Long cartId = cartRepository.save(cart).getId();
+//        boolean cartActual = cartRepository.existsById(cartId);
+//
+//        //Then
+//        assertEquals(false, cartTest);
+//        assertEquals(true, cartActual);
+//    }
 
 }
