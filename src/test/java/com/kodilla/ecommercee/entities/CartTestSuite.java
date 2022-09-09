@@ -3,9 +3,7 @@ package com.kodilla.ecommercee.entities;
 import com.kodilla.ecommercee.EcommerceeApplication;
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.repositories.*;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,45 +13,40 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = EcommerceeApplication.class)
 public class CartTestSuite {
 
     @Autowired
-    private GroupRepository groupRepository;
+    GroupRepository groupRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
+    OrderRepository orderRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    ProductRepository productRepository;
 
     @Autowired
-    private RequestProductRepository requestProductRepository;
+    RequestProductRepository requestProductRepository;
 
     @Autowired
-    private CartRepository cartRepository;
+    CartRepository cartRepository;
 
-    private Group group;
-    private Product product;
-    private RequestProduct requestProduct;
-    private User user;
-    private Order order;
-    private Cart cart;
+    Group group = new Group();
+    Order order = new Order();
+    User user = new User();
+    Product product = new Product();
+    RequestProduct requestProduct = new RequestProduct();
+    Cart cart = new Cart();
 
-    @BeforeEach
-    void setObjects() {
-        group = new Group();
-        product = new Product();
-        requestProduct = new RequestProduct();
-        user = new User();
-        order = new Order();
-        cart = new Cart();
-
+    @Test
+    public void saveCartTest() {
+        //Given
         group.setName("First group");
         product.setName("First product");
         product.setDescription("Product description");
@@ -84,10 +77,7 @@ public class CartTestSuite {
         requestProduct.setCart(cart);
         requestProduct.setProduct(product);
         requestProductRepository.save(requestProduct);
-    }
 
-    @Test
-    public void shouldSaveCart() {
         //When
         boolean cartTest = cartRepository.existsById(7L);
         Long cartId = cartRepository.save(cart).getId();
@@ -98,4 +88,55 @@ public class CartTestSuite {
         assertEquals(true, cartActual);
     }
 
+    @Test
+    public void deleteCartTest() {
+        //Given
+        group.setName("Second group");
+        product.setName("Second product");
+        product.setDescription("Second Product description");
+        product.setPrice(new BigDecimal(200.00));
+        product.setGroup(group);
+        product.setVersion(1);
+        requestProduct.setQuantity(22.00);
+        requestProduct.setProduct(product);
+        user.setName("Adam");
+        user.setStatus("Active");
+        user.setUserKey(1);
+        user.setLoginInfo(Login.LOGGED);
+        order.setName("Second order");
+        order.setComment("Second Order description");
+        order.setPaid(true);
+        order.setStatus(Status.SENT);
+        order.setCreationDate(new Date());
+        order.setUser(user);
+        order.setRequestProduct(requestProduct);
+        cart.setUser(user);
+        cart.setRequestProduct(requestProduct);
+        userRepository.save(user);
+        groupRepository.save(group);
+        productRepository.save(product);
+        requestProductRepository.save(requestProduct);
+        cartRepository.save(cart);
+        orderRepository.save(order);
+
+        requestProduct.setCart(cart);
+        requestProduct.setProduct(product);
+        requestProductRepository.save(requestProduct);
+
+        //When
+        order.setRequestProduct(null);
+        requestProduct.setCart(null);
+        cart.setRequestProduct(null);
+
+        orderRepository.save(order);
+        requestProductRepository.save(requestProduct);
+        cartRepository.save(cart);
+
+        orderRepository.deleteAll();
+        requestProductRepository.deleteAll();
+        cartRepository.deleteAll();
+
+        //Then
+        assertEquals(Optional.empty(), cartRepository.findById(cart.getId()));
+    }
 }
