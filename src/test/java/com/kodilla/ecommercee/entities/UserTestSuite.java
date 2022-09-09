@@ -75,7 +75,6 @@ public class UserTestSuite {
         user.setLoginInfo(Login.LOGGED);
         user.setOrders(orders);
         userRepository.save(user);
-
         order1.setUser(user);
     }
 
