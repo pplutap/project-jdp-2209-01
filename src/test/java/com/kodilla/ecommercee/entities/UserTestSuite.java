@@ -3,7 +3,6 @@ package com.kodilla.ecommercee.entities;
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.repositories.*;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,15 +77,6 @@ public class UserTestSuite {
         userRepository.save(user);
 
         order1.setUser(user);
-    }
-
-    @AfterEach
-    void cleanUp() {
-//        productRepository.delete(product);
-//        groupRepository.delete(group);
-//        requestProductRepository.delete(requestProduct);
-//        orderRepository.delete(order1);
-//        userRepository.delete(user);
     }
 
     @Test
