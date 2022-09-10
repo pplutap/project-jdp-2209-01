@@ -88,7 +88,7 @@ public class UserTestSuite {
 
         //then
         Assert.assertNotEquals(0, userId);
-        Assert.assertEquals(true, isExist);
+        Assert.assertTrue(isExist);
     }
 
     @Test
@@ -102,6 +102,6 @@ public class UserTestSuite {
 
         //then
         Assert.assertNotEquals(0, userId);
-        Assert.assertEquals(false, isExist);
+        Assert.assertFalse(isExist);
     }
 }
