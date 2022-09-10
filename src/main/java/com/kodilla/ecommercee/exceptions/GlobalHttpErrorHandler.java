@@ -9,8 +9,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(CartNotFoundException.class)
-    public ResponseEntity<Object> handleCartNotFoundException(CartNotFoundException exception) {
-        return new ResponseEntity<>("Cart with given id doesn't exist", HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(ProductInCartNotFoundException.class)
+    public ResponseEntity<Object> handleProductInCartNotFoundException(ProductInCartNotFoundException exception) {
+        return new ResponseEntity<>("Product in cart with given id doesn't exist", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PriceOfProductChangedException.class)
+    public ResponseEntity<Object> handlePriceOfProductChanged(PriceOfProductChangedException exception) {
+        return new ResponseEntity<>("Complete your cart again, price/s changed", HttpStatus.BAD_REQUEST);
     }
 }

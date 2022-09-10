@@ -1,13 +1,17 @@
 package com.kodilla.ecommercee.services;
 
-import com.kodilla.ecommercee.domain.Cart;
-import com.kodilla.ecommercee.domain.CartDto;
-import com.kodilla.ecommercee.exceptions.CartNotFoundException;
+import com.kodilla.ecommercee.domain.*;
+import com.kodilla.ecommercee.exceptions.PriceOfProductChangedException;
+import com.kodilla.ecommercee.exceptions.ProductInCartNotFoundException;
 import com.kodilla.ecommercee.mappers.CartMapper;
 import com.kodilla.ecommercee.repositories.CartRepository;
+import com.kodilla.ecommercee.repositories.OrderRepository;
+import com.kodilla.ecommercee.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,32 +19,72 @@ import java.util.List;
 public class CartService {
 
     private final CartRepository cartRepository;
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
     private final CartMapper cartMapper;
 
-    public List<CartDto> getAllCarts() {
+    public List<RequestProductDto> getAllProducts() {
         List<Cart> cartList = cartRepository.findAll();
-        List<CartDto> cartDtoList = cartMapper.mapToCardDtoList(cartList);
-        return cartDtoList;
+        List<RequestProduct> requestProductList = new ArrayList<>();
+        for (Cart cart: cartList) {
+            requestProductList.add(cart.getRequestProduct());
+        }
+        List<RequestProductDto> requestProductDtoList = cartMapper.mapToRequestProductDtoList(requestProductList);
+        return requestProductDtoList;
     }
 
-    public CartDto getCart(final Long cartId) throws CartNotFoundException {
-        Cart cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
-        CartDto cartDto = cartMapper.mapToCartDto(cart);
-        return cartDto;
+    public RequestProductDto getRequestProduct(final Long productID) throws ProductInCartNotFoundException {
+        Cart cart = cartRepository.findCartByRequestProduct_Id(productID).orElseThrow(ProductInCartNotFoundException::new);
+        RequestProduct requestProduct = cart.getRequestProduct();
+        RequestProductDto requestProductDto = cartMapper.mapToRequestProductDto(requestProduct);
+        return requestProductDto;
     }
 
-    public Cart saveCart(final CartDto cartDto) {
-        Cart cart = cartMapper.mapToCart(cartDto);
+    public Cart saveElementInCart(final RequestProductDto requestProductDto) {
+        RequestProduct requestProduct = cartMapper.mapToRequestProduct(requestProductDto);
+        Cart cart = requestProduct.getCart();
         return cartRepository.save(cart);
     }
 
-    public CartDto editCart(final CartDto cartDto) {
+    public CartDto editElementInCart(final CartDto cartDto) {
         Cart cart = cartMapper.mapToCart(cartDto);
         Cart savedCart = cartRepository.save(cart);
         return cartMapper.mapToCartDto(savedCart);
     }
 
-    public void deleteCart(final Long cartId) {
-        cartRepository.deleteById(cartId);
+    public void deleteElementFromCart(final Long requestProductId) throws ProductInCartNotFoundException {
+        cartRepository.deleteCartByRequestProduct_Id(requestProductId).orElseThrow(ProductInCartNotFoundException::new);
+    }
+
+    public void deleteAllProductsFromCart() {
+        cartRepository.deleteAll();
+    }
+
+    public void createOrder(final List<Cart> cartList) throws PriceOfProductChangedException {
+        boolean priceChanged = false;
+        for (Cart cart: cartList) {
+            if ((cart.getRequestProduct().getProduct().getVersion() !=
+            productRepository.findById(cart.getRequestProduct().getProduct().getId()).get().getVersion()) &&
+            !priceChanged) {
+                priceChanged = true;
+            }
+        }
+        if(!priceChanged) {
+            for (Cart cart: cartList) {
+                Order order = new Order();
+                order.setId(0L);
+                order.setName("Order from CartController");
+                order.setComment("Order from CartController");
+                order.setPaid(false);
+                order.setStatus(Status.IN_PROGRESS);
+                order.setCreationDate(new Date(System.currentTimeMillis()));
+                order.setUser(cart.getUser());
+                order.setRequestProduct(cart.getRequestProduct());
+                orderRepository.save(order);
+            }
+        } else {
+            deleteAllProductsFromCart();
+            throw new PriceOfProductChangedException();
+        }
     }
 }
