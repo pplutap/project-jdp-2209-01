@@ -8,6 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.OpenOption;
+import java.util.Optional;
+
 @Repository
 public interface GroupRepository extends CrudRepository<Group, Long> {
 
@@ -17,5 +20,8 @@ public interface GroupRepository extends CrudRepository<Group, Long> {
             "((SELECT COUNT(p) FROM PRODUCTS p WHERE p.group.id=:id) = 0) " +
             "AND (g.id =:id) ")
     int safeDelete(@Param("id") Long id);
+
+    Optional<Group> findGroupByName(String name);
+
 }
 
