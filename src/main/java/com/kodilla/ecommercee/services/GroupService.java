@@ -6,10 +6,8 @@ import com.kodilla.ecommercee.exceptions.GroupAlreadyExistException;
 import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.exceptions.InvalidObjectId;
 import com.kodilla.ecommercee.exceptions.UnsafeDeleteAttemptException;
-import com.kodilla.ecommercee.mappers.GroupMapper;
 import com.kodilla.ecommercee.repositories.GroupRepository;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
