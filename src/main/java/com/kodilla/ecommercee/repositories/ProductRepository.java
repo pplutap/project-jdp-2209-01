@@ -1,6 +1,8 @@
 package com.kodilla.ecommercee.repositories;
 
+import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.Product;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +14,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     Optional<Product> findById(Long id);
     List<Product> findAll();
     void deleteById(Long id);
+    long countProductsByGroup(Long id);
 
 }
