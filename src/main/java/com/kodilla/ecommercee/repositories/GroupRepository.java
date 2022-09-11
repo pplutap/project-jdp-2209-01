@@ -7,6 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,6 +22,9 @@ public interface GroupRepository extends CrudRepository<Group, Long> {
     int safeDelete(@Param("id") Long id);
 
     Optional<Group> findGroupByName(String name);
+
+    @Override
+    List<Group> findAll();
 
 }
 

@@ -6,6 +6,7 @@ import com.kodilla.ecommercee.exceptions.GroupAlreadyExistException;
 import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.exceptions.InvalidObjectId;
 import com.kodilla.ecommercee.exceptions.UnsafeDeleteAttemptException;
+import com.kodilla.ecommercee.mappers.GroupMapper;
 import com.kodilla.ecommercee.repositories.GroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.kodilla.ecommercee.mappers.GroupMapper.mapToDto;
 
@@ -23,11 +25,8 @@ public class GroupService {
     private final GroupRepository groupRepository;
 
     public List<GroupDto> getAllGroups(){
-        Iterable<Group> groups = groupRepository.findAll();
-        List<GroupDto> groupDtos = new ArrayList<>();
-        groups.forEach(group ->  groupDtos.add(mapToDto(group)));
-
-        return groupDtos;
+        return groupRepository.findAll().stream().map(GroupMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
     public GroupDto getGroupById(Long id) throws GroupNotFoundException {
