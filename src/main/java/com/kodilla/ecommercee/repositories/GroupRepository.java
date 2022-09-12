@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import java.util.Optional;
+
+
 @Repository
 public interface GroupRepository extends CrudRepository<Group, Long> {
     List<Group> findAll ();
@@ -20,5 +23,11 @@ public interface GroupRepository extends CrudRepository<Group, Long> {
             "((SELECT COUNT(p) FROM PRODUCTS p WHERE p.group.id=:id) = 0) " +
             "AND (g.id =:id) ")
     int safeDelete(@Param("id") Long id);
+
+    Optional<Group> findGroupByName(String name);
+
+    @Override
+    List<Group> findAll();
+
 }
 
