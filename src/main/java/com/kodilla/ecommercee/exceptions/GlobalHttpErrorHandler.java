@@ -18,4 +18,9 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handlePriceOfProductChanged(PriceOfProductChangedException exception) {
         return new ResponseEntity<>("Complete your cart again, price/s changed", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ProdctNotFoundException.class)
+    public ResponseEntity<Object> handleProdctNotFoundException(ProdctNotFoundException exception) {
+        return new ResponseEntity<>("Product with given ID does not exist", HttpStatus.BAD_REQUEST);
+    }
 }
