@@ -20,9 +20,6 @@ import java.util.Optional;
 public class OrderTestSuite {
 
     @Autowired
-    private CartRepository cartRepository;
-
-    @Autowired
     private GroupRepository groupRepository;
 
     @Autowired
@@ -40,7 +37,6 @@ public class OrderTestSuite {
     private Group group;
     private Product product;
     private RequestProduct requestProduct;
-    private Cart cart;
     private User user;
     private Order order;
 
@@ -49,7 +45,6 @@ public class OrderTestSuite {
         group = new Group();
         product = new Product();
         requestProduct = new RequestProduct();
-        cart = new Cart();
         user = new User();
         order = new Order();
 
@@ -58,7 +53,7 @@ public class OrderTestSuite {
 
         product.setName("T-shirt");
         product.setDescription("Cloth recommended to use during summer");
-        product.setPrice(new BigDecimal(100.00));
+        product.setPrice(BigDecimal.valueOf(100.00));
         product.setVersion(1);
         product.setGroup(group);
         productRepository.save(product);
@@ -122,7 +117,7 @@ public class OrderTestSuite {
         Order testOrder = orderRepository.findById(order.getId()).get();
         //Then
         Assertions.assertEquals("Very important order", testOrder.getComment());
-        Assertions.assertEquals(true, testOrder.isPaid());
+        Assertions.assertTrue(testOrder.isPaid());
         Assertions.assertEquals("Fast delivery", testOrder.getName());
         Assertions.assertEquals(Status.SENT, testOrder.getStatus());
         Assertions.assertEquals(order.getRequestProduct().getId(), testOrder.getRequestProduct().getId());
@@ -148,14 +143,14 @@ public class OrderTestSuite {
         Order testOrderAfter = orderRepository.findById(order.getId()).get();
 
         Assertions.assertEquals("Very important order", testOrderBefore.getComment());
-        Assertions.assertEquals(true, testOrderBefore.isPaid());
+        Assertions.assertTrue(testOrderBefore.isPaid());
         Assertions.assertEquals("Fast delivery", testOrderBefore.getName());
         Assertions.assertEquals(Status.SENT, testOrderBefore.getStatus());
         Assertions.assertEquals(order.getRequestProduct().getId(), testOrderBefore.getRequestProduct().getId());
         Assertions.assertEquals(order.getUser().getId(), testOrderBefore.getUser().getId());
 
         Assertions.assertEquals("Very important order", testOrderAfter.getComment());
-        Assertions.assertEquals(true, testOrderAfter.isPaid());
+        Assertions.assertTrue(testOrderAfter.isPaid());
         Assertions.assertEquals("Slow delivery", testOrderAfter.getName());
         Assertions.assertEquals(Status.PREPARED, testOrderAfter.getStatus());
         Assertions.assertEquals(order.getRequestProduct().getId(), testOrderAfter.getRequestProduct().getId());

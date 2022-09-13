@@ -35,4 +35,5 @@ public class Product {
 
     @Column(name = "VERSION")
     private Integer version;
+
 }

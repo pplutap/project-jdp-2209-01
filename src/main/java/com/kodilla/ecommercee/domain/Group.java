@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,5 +21,4 @@ public class Group {
 
     @Column(name = "GROUP_NAME")
     private String name;
-
 }
