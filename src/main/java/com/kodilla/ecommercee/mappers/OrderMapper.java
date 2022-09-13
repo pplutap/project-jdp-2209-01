@@ -13,6 +13,6 @@ public class OrderMapper {
     public static Order mapToOrder (OrderDto orderDto) {
         return new Order(
                 orderDto.getId(), orderDto.getTitle(), orderDto.getContent(), orderDto.isPaid(),
-                orderDto.getStatus(), orderDto.getCreationDate(), orderDto.getUser(), orderDto.getRequestProduct())
+                orderDto.getStatus(), orderDto.getCreationDate(), orderDto.getUser(), orderDto.getRequestProduct());
     }
 }
